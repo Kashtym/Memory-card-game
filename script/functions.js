@@ -1,9 +1,10 @@
 import { pictures } from "./data.js";
-import { stopTimer } from "./timer.js";
+import { stopTimer, timerForDisplay } from "./timer.js";
 
 const cards = document.querySelector(".cards");
 let openCard1, openCard2;
 let counter = 0;
+let result = {};
 
 // shuffle array
 function shuffleArray(array) {
@@ -13,16 +14,16 @@ function shuffleArray(array) {
     }
 }
 
-// create card with image url
-function createCard(url) {
+// create card with background image
+function createCard(url, cardNum) {
     let card = document.createElement("div");
     card.classList.add("card");
+    card.dataset.cardNum = cardNum;
     card.innerHTML = `
-<div class="card__front">
-    <img src="${url}" alt="" />
-</div>
-<div class="card__back">Click me</div>
+    <div class="card__front "></div>
+    <div class="card__back"></div>
    `;
+    card.children[0].style.background = `white url(../.${url})  no-repeat center /contain`;
     card.addEventListener("click", checkCard);
     return card;
 }
@@ -33,8 +34,8 @@ function addCards() {
     const cardsArr = [];
     //create array with cards
     for (let i = 0; i < pictures.length; i++) {
-        cardsArr.push(createCard(pictures[i]));
-        cardsArr.push(createCard(pictures[i]));
+        cardsArr.push(createCard(pictures[i], i));
+        cardsArr.push(createCard(pictures[i], i));
     }
 
     shuffleArray(cardsArr);
@@ -43,6 +44,8 @@ function addCards() {
 
 //
 function checkCard() {
+    //setResult();
+    //showResult();
     if (!openCard2) {
         this.classList.add("card__flip");
         if (!openCard1) {
@@ -50,11 +53,8 @@ function checkCard() {
         } else {
             openCard2 = this;
             counter++;
-            showCounter();
-            if (
-                openCard1.children[0].children[0].src !==
-                openCard2.children[0].children[0].src
-            ) {
+            showScore();
+            if (openCard1.dataset.cardNum !== openCard2.dataset.cardNum) {
                 setTimeout(function () {
                     openCard1.classList.remove("card__flip");
                     openCard2.classList.remove("card__flip");
@@ -69,6 +69,7 @@ function checkCard() {
             }
             if (checkEndGame()) {
                 stopTimer();
+                setResult();
             }
         }
     }
@@ -87,14 +88,41 @@ function checkEndGame() {
     }
 }
 
-const counterText = document.querySelector(".result__counter > span");
-function showCounter() {
-    counterText.textContent = counter;
+const score = document.querySelector("#score");
+function showScore() {
+    score.textContent = counter;
 }
 
-function restarCounter() {
+function restartScore() {
     counter = 0;
-    counterText.textContent = counter;
+    score.textContent = counter;
 }
 
-export { addCards, restarCounter };
+function setResult() {
+    result.name = document.querySelector("#nickname").value;
+    result.date = new Date();
+    result.score = counter;
+    const time = timerForDisplay();
+    result.time = `${time.minutes}:${time.seconds}:${time.milliseconds}`;
+    console.dir(result);
+}
+
+function showResult() {
+    const gameResult = document.querySelector("#game-result");
+    gameResult.classList.remove("none");
+    const gameResultArea = gameResult.querySelector("#game-result ul li p");
+    gameResultArea.textContent = `Date:${createDate(result.date)} Nickname:${
+        result.name
+    } Score:${result.score} Time:${result.time}`;
+}
+
+function createDate(date) {
+    return `${date.getDate().toString().padStart(2, 0)}.${(date.getMonth() + 1)
+        .toString()
+        .padStart(2, 0)}.${date.getFullYear()} ${date
+        .getHours()
+        .toString()
+        .padStart(2, 0)}:${date.getMinutes().toString().padStart(2, 0)}`;
+}
+
+export { addCards, restartScore };

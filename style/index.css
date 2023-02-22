@@ -1,0 +1,220 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+:root {
+  font-size: 16px;
+  font-family: "Space Mono", monospace;
+}
+
+.cotainer {
+  max-width: 1280px;
+  width: 80%;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+}
+.cotainer .game-area {
+  height: 100%;
+  position: relative;
+}
+.cotainer .game-area::after {
+  content: "";
+  background-image: url(../../img/fon.jpg), linear-gradient(rgb(135, 241, 254) 63%, rgb(160, 181, 54) 37%);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  opacity: 1;
+}
+
+.window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid black;
+  max-width: 60%;
+  background-color: rgba(233, 233, 134, 0.9);
+  padding: 5vh 5vw;
+  border-radius: 2rem;
+  text-align: center;
+}
+.window h1 {
+  margin-bottom: 2rem;
+  font-size: 4rem;
+  color: rgb(172, 30, 30);
+  text-shadow: 3px 3px 4px grey;
+}
+.window .nav {
+  list-style-type: none;
+}
+.window .nav li {
+  font-size: 2.5rem;
+  color: rgb(172, 30, 30);
+  margin-bottom: 2vh;
+}
+.window .nav li input {
+  background-color: rgb(201, 200, 200);
+  text-align: center;
+  color: rgb(58, 54, 54);
+  font-size: 2rem;
+  border-radius: 1rem;
+  width: 50%;
+  margin-left: 1rem;
+}
+.window .nav li:last-of-type {
+  margin: 0;
+}
+.window .nav .nav-title {
+  color: rgb(58, 54, 54);
+}
+.window .nav .nav-title > p {
+  font-size: 1.5rem;
+}
+.window .nav .nav-button {
+  cursor: pointer;
+  transition: transform 1s;
+}
+.window .nav .nav-button:hover {
+  transform: scale(1.2);
+  text-decoration: underline;
+}
+
+.cards {
+  height: 90vh;
+  margin: 0 auto;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2vh 2vw;
+  padding: 0.5rem;
+}
+.cards .card {
+  height: 100%;
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+.cards .card .card__front,
+.cards .card .card__back {
+  border: 0.3rem solid green;
+  border-radius: 1rem;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+}
+.cards .card .card__front {
+  transform: rotateY(180deg);
+}
+.cards .card .card__back {
+  background: url(../../img/fon-card.png) rgb(231, 233, 112);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.cards .card__flip {
+  transform: rotateY(180deg);
+}
+
+.score-buttons {
+  height: 10vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.score-buttons .button {
+  border: 3px solid black;
+  background-color: rgb(235, 152, 0);
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  height: fit-content;
+  padding: 0.2rem 2rem;
+  cursor: pointer;
+}
+.score-buttons .score {
+  font-size: 1.2rem;
+  background-color: rgba(233, 233, 134, 0.9);
+  padding: 0.2rem;
+}
+
+.none {
+  display: none;
+}
+
+@media only screen and (max-width: 991px) {
+  :root {
+    font-size: 14px;
+  }
+  .menu {
+    max-width: 80%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  :root {
+    font-size: 12px;
+  }
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+}
+@media only screen and (max-width: 414px) {
+  :root {
+    font-size: 10px;
+  }
+}

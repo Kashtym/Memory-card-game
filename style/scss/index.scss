@@ -1,0 +1,198 @@
+@import "_reset.scss";
+
+:root {
+    font-size: 16px;
+    font-family: "Space Mono", monospace;
+}
+
+$back-yellow-color: rgba(233, 233, 134, 0.9);
+$back-gray-color: rgb(201, 200, 200);
+$text-color-brown: rgb(172, 30, 30);
+$text-color-black: rgb(58, 54, 54);
+$card-border: green;
+$card-back: rgb(231, 233, 112);
+$button-back: rgb(235, 152, 0);
+
+.cotainer {
+    max-width: 1280px;
+    width: 80%;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    & .game-area {
+        height: 100%;
+        position: relative;
+    }
+
+    & .game-area::after {
+        content: "";
+        background-image: url(../../img/fon.jpg),
+            linear-gradient(rgb(135, 241, 254) 63%, rgb(160, 181, 54) 37%);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        opacity: 1;
+    }
+}
+
+//menu & results
+
+.window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid black;
+    max-width: 60%;
+    background-color: $back-yellow-color;
+    padding: 5vh 5vw;
+    border-radius: 2rem;
+    text-align: center;
+    & h1 {
+        margin-bottom: 2rem;
+        font-size: 4rem;
+        color: $text-color-brown;
+        text-shadow: 3px 3px 4px grey;
+    }
+    & .nav {
+        list-style-type: none;
+
+        & li {
+            font-size: 2.5rem;
+            color: $text-color-brown;
+            margin-bottom: 2vh;
+            & input {
+                background-color: $back-gray-color;
+                text-align: center;
+                color: $text-color-black;
+                font-size: 2rem;
+                border-radius: 1rem;
+                width: 50%;
+                margin-left: 1rem;
+            }
+        }
+        & li:last-of-type {
+            margin: 0;
+        }
+
+        & .nav-title {
+            color: $text-color-black;
+            & > p {
+                font-size: 1.5rem;
+            }
+        }
+
+        & .nav-button {
+            cursor: pointer;
+            transition: transform 1s;
+            &:hover {
+                transform: scale(1.2);
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+//cards
+
+.cards {
+    height: 90vh;
+    margin: 0 auto;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2vh 2vw;
+    padding: 0.5rem;
+    & .card {
+        height: 100%;
+        position: relative;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+        .card__front,
+        .card__back {
+            border: 0.3rem solid $card-border;
+            border-radius: 1rem;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+        }
+        .card__front {
+            transform: rotateY(180deg);
+        }
+        .card__back {
+            background: url(../../img/fon-card.png) $card-back;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+    .card__flip {
+        transform: rotateY(180deg);
+    }
+}
+
+//score
+
+.score-buttons {
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    & .button {
+        border: 3px solid black;
+        background-color: $button-back;
+        border-radius: 1rem;
+        font-size: 1.5rem;
+        height: fit-content;
+        padding: 0.2rem 2rem;
+        cursor: pointer;
+    }
+    & .score {
+        font-size: 1.2rem;
+        background-color: $back-yellow-color;
+        padding: 0.2rem;
+    }
+}
+
+// none
+.none {
+    display: none;
+}
+
+@media only screen and (max-width: 991px) {
+    :root {
+        font-size: 14px;
+    }
+    .menu {
+        max-width: 80%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    :root {
+        font-size: 12px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    :root {
+        font-size: 10px;
+    }
+}

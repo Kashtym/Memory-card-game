@@ -4,28 +4,90 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./style/index.css" />
         <title>Memory card game</title>
-        <link rel="stylesheet" href="./style/normalize.css" />
-        <link rel="stylesheet" href="./style/style.css" />
     </head>
     <body>
-        <header>
-            <div class="header">
-                <p class="header__hello">Hello</p>
-                <button class="start-button">Start</button>
+        <div class="cotainer">
+            <div class="game-area">
+                <div class="window" id="menu">
+                    <h1 class="title">Memory card</h1>
+                    <ul class="nav">
+                        <li class="nav-title">
+                            Nickname:<input
+                                type="text"
+                                value="Player"
+                                maxlength="10"
+                                id="nickname"
+                            />
+                        </li>
+                        <li
+                            class="nav-button"
+                            data-nav="results"
+                            id="btn-result"
+                        >
+                            Best result
+                        </li>
+                        <li class="nav-button" data-nav="game" id="btn-start">
+                            Play now
+                        </li>
+                    </ul>
+                </div>
+                <div class="game none" id="game">
+                    <div class="cards"></div>
+                    <div class="window none" id="game-result">
+                        <ul class="nav">
+                            <li class="nav-title">
+                                Your result:
+                                <p></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="score-buttons">
+                        <button class="button" data-nav="game" id="btn-restart">
+                            Restart
+                        </button>
+                        <button
+                            class="button"
+                            data-nav="menu"
+                            id="btn-game-quit"
+                        >
+                            Quit
+                        </button>
+                        <div class="score">
+                            <p>Score: <span id="score">0</span></p>
+                            <p>
+                                Time: <span id="minutes">00</span>:<span
+                                    id="seconds"
+                                    >00</span
+                                >:<span id="milliseconds">00</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="window none" id="results">
+                    <ul class="nav">
+                        <li class="nav-title">
+                            Best time:
+                            <p>wedfewfw wefwe fwefew</p>
+                        </li>
+                        <li class="nav-title">
+                            Best score:
+                            <p>wedfewfw wefwe fwefew</p>
+                        </li>
+                        <li class="nav-button" data-nav="menu" id="btn-quit">
+                            Quit
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </header>
-        <main>
-            <div class="cards"></div>
-        </main>
-        <footer>
-            <div class="result">
-                <p class="result__counter">counter: <span></span></p>
-                <p class="result__timer">
-                    timer: <span>00</span>:<span>00</span>:<span>00</span>
-                </p>
-            </div>
-        </footer>
-        <script src="./script/script.js" type="module"></script>
+        </div>
+        <script src="./script/index.js" type="module"></script>
     </body>
 </html>
