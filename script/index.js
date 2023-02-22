@@ -1,4 +1,4 @@
-import { addCards, restartScore } from "./functions.js";
+import { addCards, restartScore, showBestResults } from "./functions.js";
 import { startTimer, stopTimer } from "./timer.js";
 
 //pages array
@@ -56,13 +56,8 @@ btnGameQuit.addEventListener("click", stopTimer);
 //start restart game
 btnStart.addEventListener("click", addCards);
 btnRestart.addEventListener("click", addCards);
+btnStart.addEventListener("click", restartScore);
 btnRestart.addEventListener("click", restartScore);
 
-const pictures = [
-    "./img/pic1.jpg",
-    "./img/pic2.jpg",
-    "./img/pic3.jpg",
-    "./img/pic4.jpg",
-    "./img/pic5.jpg",
-    "./img/pic6.jpg",
-];
+//show best results
+btnResult.addEventListener("click", showBestResults);

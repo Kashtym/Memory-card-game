@@ -40,12 +40,12 @@ function addCards() {
 
     shuffleArray(cardsArr);
     cardsArr.forEach((elem) => cards.appendChild(elem));
+
+    removeResult();
 }
 
-//
+//game logic
 function checkCard() {
-    //setResult();
-    //showResult();
     if (!openCard2) {
         this.classList.add("card__flip");
         if (!openCard1) {
@@ -68,8 +68,10 @@ function checkCard() {
                 openCard2 = "";
             }
             if (checkEndGame()) {
-                stopTimer();
                 setResult();
+                stopTimer();
+                showResult();
+                saveResult(result);
             }
         }
     }
@@ -88,6 +90,7 @@ function checkEndGame() {
     }
 }
 
+// show and reset score
 const score = document.querySelector("#score");
 function showScore() {
     score.textContent = counter;
@@ -98,24 +101,33 @@ function restartScore() {
     score.textContent = counter;
 }
 
+// results
+
 function setResult() {
     result.name = document.querySelector("#nickname").value;
-    result.date = new Date();
+    result.date = createDate(new Date());
     result.score = counter;
     const time = timerForDisplay();
     result.time = `${time.minutes}:${time.seconds}:${time.milliseconds}`;
-    console.dir(result);
 }
 
 function showResult() {
     const gameResult = document.querySelector("#game-result");
     gameResult.classList.remove("none");
     const gameResultArea = gameResult.querySelector("#game-result ul li p");
-    gameResultArea.textContent = `Date:${createDate(result.date)} Nickname:${
-        result.name
-    } Score:${result.score} Time:${result.time}`;
+    gameResultArea.textContent = resultTostring(result);
 }
 
+function resultTostring(res) {
+    return `Date:${res.date} Nickname:${res.name} Score:${res.score} Time:${res.time}`;
+}
+
+function removeResult() {
+    const gameResult = document.querySelector("#game-result");
+    gameResult.classList.add("none");
+}
+
+//create string date in format "DD.MM.YYYY HH:MM" from date object
 function createDate(date) {
     return `${date.getDate().toString().padStart(2, 0)}.${(date.getMonth() + 1)
         .toString()
@@ -125,4 +137,45 @@ function createDate(date) {
         .padStart(2, 0)}:${date.getMinutes().toString().padStart(2, 0)}`;
 }
 
-export { addCards, restartScore };
+// results in local storage
+
+function saveResult(res) {
+    if (!localStorage.memCardGameData) {
+        localStorage.memCardGameData = JSON.stringify([]);
+    }
+    const memCardGameDataArr = JSON.parse(localStorage.memCardGameData);
+    memCardGameDataArr.push(res);
+    localStorage.memCardGameData = JSON.stringify(memCardGameDataArr);
+}
+
+function showBestResults() {
+    if (localStorage.memCardGameData) {
+        const memCardGameDataArr = JSON.parse(localStorage.memCardGameData);
+
+        let minScore, minTime;
+
+        if (memCardGameDataArr.length > 0) {
+            //min score
+            minScore = memCardGameDataArr[0];
+            memCardGameDataArr.forEach((el) => {
+                if (parseFloat(el.score) < parseFloat(minScore.score)) {
+                    minScore = el;
+                }
+            });
+            document.querySelector("#best-score").textContent =
+                resultTostring(minScore);
+
+            //min time
+            minTime = memCardGameDataArr[0];
+            memCardGameDataArr.forEach((el) => {
+                if (el.time < minTime.time) {
+                    minTime = el;
+                }
+            });
+            document.querySelector("#best-time").textContent =
+                resultTostring(minTime);
+        }
+    }
+}
+
+export { addCards, restartScore, showBestResults };
