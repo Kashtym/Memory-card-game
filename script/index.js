@@ -57,3 +57,12 @@ btnGameQuit.addEventListener("click", stopTimer);
 btnStart.addEventListener("click", addCards);
 btnRestart.addEventListener("click", addCards);
 btnRestart.addEventListener("click", restartScore);
+
+const pictures = [
+    "./img/pic1.jpg",
+    "./img/pic2.jpg",
+    "./img/pic3.jpg",
+    "./img/pic4.jpg",
+    "./img/pic5.jpg",
+    "./img/pic6.jpg",
+];

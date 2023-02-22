@@ -23,7 +23,7 @@ function createCard(url, cardNum) {
     <div class="card__front "></div>
     <div class="card__back"></div>
    `;
-    card.children[0].style.background = `white url(.${url})  no-repeat center /contain`;
+    card.children[0].style.background = `white url(${url}) no-repeat center / contain`;
     card.addEventListener("click", checkCard);
     return card;
 }
