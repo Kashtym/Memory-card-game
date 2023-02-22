@@ -63,7 +63,7 @@ h6 {
 }
 .cotainer .game-area::after {
   content: "";
-  background-image: url(../../img/fon.jpg), linear-gradient(rgb(135, 241, 254) 63%, rgb(160, 181, 54) 37%);
+  background-image: url(../img/fon.jpg), linear-gradient(rgb(135, 241, 254) 63%, rgb(160, 181, 54) 37%);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -162,7 +162,7 @@ h6 {
   transform: rotateY(180deg);
 }
 .cards .card .card__back {
-  background: url(../../img/fon-card.png) rgb(231, 233, 112);
+  background: url(../img/fon-card.png) rgb(231, 233, 112);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -199,6 +199,9 @@ h6 {
 @media only screen and (max-width: 991px) {
   :root {
     font-size: 14px;
+  }
+  .cotainer {
+    width: 100%;
   }
   .menu {
     max-width: 80%;
