@@ -1,4 +1,9 @@
-import { addCards, restartScore, showBestResults } from "./functions.js";
+import {
+    addCards,
+    restartScore,
+    showBestResults,
+    goToPage,
+} from "./functions.js";
 import { startTimer, stopTimer } from "./timer.js";
 
 //pages array
@@ -32,17 +37,6 @@ pages.push(resultsPage);
 const btnQuit = resultsPage.querySelector("#btn-quit");
 buttons.push(btnQuit);
 
-//go to page function
-function goToPage() {
-    pages.forEach((el) => {
-        if (this.dataset.nav === el.id) {
-            el.classList.remove("none");
-        } else {
-            el.classList.add("none");
-        }
-    });
-}
-
 //page navigation
 buttons.forEach((el) => {
     el.addEventListener("click", goToPage);
@@ -61,3 +55,5 @@ btnRestart.addEventListener("click", restartScore);
 
 //show best results
 btnResult.addEventListener("click", showBestResults);
+
+export { pages };

@@ -166,6 +166,10 @@ $button-back: rgb(235, 152, 0);
     }
 }
 
+#game-result {
+    z-index: 1;
+}
+
 // none
 .none {
     display: none;

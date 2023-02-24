@@ -1,5 +1,6 @@
 import { pictures } from "./data.js";
 import { stopTimer, timerForDisplay } from "./timer.js";
+import { pages } from "./index.js";
 
 const cards = document.querySelector(".cards");
 let openCard1, openCard2;
@@ -101,7 +102,7 @@ function restartScore() {
     score.textContent = counter;
 }
 
-// results
+// show and set results
 
 function setResult() {
     result.name = document.querySelector("#nickname").value;
@@ -137,7 +138,7 @@ function createDate(date) {
         .padStart(2, 0)}:${date.getMinutes().toString().padStart(2, 0)}`;
 }
 
-// results in local storage
+// save and read results in local storage
 
 function saveResult(res) {
     if (!localStorage.memCardGameData) {
@@ -178,4 +179,15 @@ function showBestResults() {
     }
 }
 
-export { addCards, restartScore, showBestResults };
+//go to page function
+function goToPage() {
+    pages.forEach((el) => {
+        if (this.dataset.nav === el.id) {
+            el.classList.remove("none");
+        } else {
+            el.classList.add("none");
+        }
+    });
+}
+
+export { addCards, restartScore, showBestResults, goToPage };
